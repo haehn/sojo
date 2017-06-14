@@ -1,1 +1,1 @@
-# synp
+# sojo
