@@ -10,9 +10,15 @@ S.load_synapse = function() {
 
 };
 
-S.synapse_loaded = function(xhr) {
-  
-  console.log(xhr)
-  XXX = xhr;
+S.synapse_loaded = function(e) {
+
+  response = e.target.result;
+
+  // grab meta data
+  meta = new Float64Array(response.slice(6*8,-1));
+  console.log(meta);
+
+  blob = new Blob([response.slice(6*8,-1)], {type: "image/jpeg"});
+  document.getElementById('image').setAttribute('src',URL.createObjectURL(blob))
 
 };
