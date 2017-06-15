@@ -25,6 +25,11 @@ body {
   color: lightgreen;
 }
 
+.disabled {
+  opacity: 0.65; 
+  cursor: not-allowed;
+}
+
 .okButton {
   -moz-box-shadow:inset 0px 1px 0px 0px #caefab;
   -webkit-box-shadow:inset 0px 1px 0px 0px #caefab;
@@ -108,7 +113,7 @@ body {
 }
 
 
-.skipButton {
+.grayButton {
   -moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
   -webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
   box-shadow:inset 0px 1px 0px 0px #ffffff;
@@ -134,7 +139,7 @@ body {
   text-decoration:none;
   text-shadow:0px 1px 0px #ffffff;
 }
-.skipButton:hover {
+.grayButton:hover {
   background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #dfdfdf), color-stop(1, #ededed));
   background:-moz-linear-gradient(top, #dfdfdf 5%, #ededed 100%);
   background:-webkit-linear-gradient(top, #dfdfdf 5%, #ededed 100%);
@@ -144,7 +149,7 @@ body {
   filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#dfdfdf', endColorstr='#ededed',GradientType=0);
   background-color:#dfdfdf;
 }
-.skipButton:active {
+.grayButton:active {
   position:relative;
   top:1px;
 }

@@ -1,4 +1,6 @@
 var S = S || {};
+S.history = [];
+S.current_synapse_id = -1;
 
 S.load_synapse = function() {
   
@@ -28,12 +30,35 @@ S.synapse_loaded = function(e) {
   // update image
   document.getElementById('image').setAttribute('src',URL.createObjectURL(blob))
 
+  S.current_synapse_id = meta[0];
+
 };
 
 S.proofread_synapse = function(how, e) {
 
-  console.log(how);
+  S.history.push(S.current_synapse_id);
 
   S.load_synapse();
+
+  // enable back button
+  document.getElementById('back').classList = ['grayButton'];
+  document.getElementById('back').onclick = S.go_back.bind(this, 'back');
+
+  document.getElementById('skip').classList = ['grayButton'];
+  document.getElementById('skip').onclick = S.proofread_synapse.bind(this, 'skip');  
+
+};
+
+S.go_back = function() {
+
+  var old_id = S.history.pop();
+
+  if (S.history.length == 1) {
+    document.getElementById('back').classList = ['grayButton disabled'];
+    document.getElementById('back').onclick = null;    
+  }
+
+  document.getElementById('skip').classList = ['grayButton disabled'];
+  document.getElementById('skip').onclick = null;  
 
 };
