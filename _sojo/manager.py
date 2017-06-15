@@ -29,6 +29,7 @@ class Manager():
     # done loading
 
     self._seen_ids = []
+    self._proofread_ids = {}
 
   def get_synapse(self, idx, debug=False):
     '''
@@ -98,6 +99,8 @@ class Manager():
       meta[3] = int(x)
       meta[4] = int(y)
       meta[5] = int(z)
+
+      self._seen_ids.append(random_id)
 
       content_type = 'image/jpeg'
       content = meta.tobytes() + output.getvalue()
