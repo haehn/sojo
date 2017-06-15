@@ -43,10 +43,10 @@ class Manager():
     # create RGBA label overlay of pre- and post-synaptic neuron
     # red is pre
     # green is post
-    overlay = np.zeros((1024, 1024, 3))
-    overlay[seg == self._pre_neurons[idx], 0] = 1
+    overlay = np.zeros((1024, 1024, 3), dtype=np.uint8)
+    overlay[seg == self._pre_neurons[idx], 0] = 255
     #overlay[seg == self._pre_neurons[idx], 3] = .3
-    overlay[seg == self._post_neurons[idx], 1] = 1
+    overlay[seg == self._post_neurons[idx], 1] = 255
     #overlay[seg == self._post_neurons[idx], 3] = .3
 
     image_ = Image.fromarray(image)
