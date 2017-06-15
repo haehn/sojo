@@ -106,7 +106,15 @@ class Manager():
       content = meta.tobytes() + output.getvalue()
       ####
 
+    elif splitted_request[1] == '?proofread':
 
+      synapse_id = splitted_request[2]
+      result = splitted_request[3]
+
+      print synapse_id, result
+
+      content_type = 'text/html'
+      content = 'thanks'
 
     return content, content_type
 

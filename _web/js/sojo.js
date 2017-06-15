@@ -43,14 +43,21 @@ S.proofread_synapse = function(how, e) {
 
   S.history.push(S.current_synapse_id);
 
-  S.load_synapse();
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', '../?proofread/'+S.current_synapse_id+'/'+how);
+  xhr.onload = function() {
 
-  // enable back button
-  document.getElementById('back').classList = ['grayButton'];
-  document.getElementById('back').onclick = S.go_back.bind(this, 'back');
+    S.load_synapse();
 
-  document.getElementById('skip').classList = ['grayButton'];
-  document.getElementById('skip').onclick = S.proofread_synapse.bind(this, 'skip');  
+    // enable back button
+    document.getElementById('back').classList = ['grayButton'];
+    document.getElementById('back').onclick = S.go_back.bind(this, 'back');
+
+    document.getElementById('skip').classList = ['grayButton'];
+    document.getElementById('skip').onclick = S.proofread_synapse.bind(this, 'skip');  
+
+  };
+  xhr.send(null);
 
 };
 
