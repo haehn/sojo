@@ -29,7 +29,8 @@ class Manager():
     # done loading
 
     self._seen_ids = []
-    self._proofread_ids = {}
+    self._proofread_ids_good = {}
+    self._proofread_ids_bad = {}
 
   def get_synapse(self, idx, debug=False):
     '''
@@ -92,15 +93,16 @@ class Manager():
       output = StringIO.StringIO()
       blended_image.save(output, 'JPEG')
 
-      meta = np.zeros((6), dtype=np.float64)
+      meta = np.zeros((8), dtype=np.float64)
       meta[0] = random_id
       meta[1] = n1
       meta[2] = n2
       meta[3] = int(x)
       meta[4] = int(y)
       meta[5] = int(z)
-
-      self._seen_ids.append(random_id)
+      meta[6] = len(self._proofread_ids_good.keys())
+      meta[7] = len(self._proofread_ids_badd.keys())
+      meta[8] = len(self._pre_neurons)
 
       content_type = 'image/jpeg'
       content = meta.tobytes() + output.getvalue()
@@ -111,7 +113,21 @@ class Manager():
       synapse_id = splitted_request[2]
       result = splitted_request[3]
 
-      print synapse_id, result
+      if result == 'good':
+        
+        self._proofread_ids_good[synapse_id] = result
+
+        self._seen_ids.append(synapse_id)
+
+      elif result == 'bad':
+
+        self._proofread_ids_bad[synapse_id] = result
+
+        self._seen_ids.append(synapse_id)
+
+      else:
+
+        print 'skipped', synapse_id    
 
       content_type = 'text/html'
       content = 'thanks'

@@ -5,6 +5,10 @@ S.current_synapse_center = [0,0,0];
 S.current_pre_synaptic_neuron = -1;
 S.dojo = 'https://dojo.rc.fas.harvard.edu/dojo/'
 
+S.good_synapses = -1;
+S.bad_synapses = -1;
+S.total_synapses = -1;
+
 S.load_synapse = function() {
   
   var xhr = new XMLHttpRequest();
@@ -20,9 +24,9 @@ S.synapse_loaded = function(e) {
   var response = e.target.response;
 
   // grab meta data
-  var meta = new Float64Array(response.slice(0,6*8));
+  var meta = new Float64Array(response.slice(0,9*8));
 
-  var blob = new Blob([response.slice(6*8,-1)], {type: "image/jpeg"});
+  var blob = new Blob([response.slice(9*8,-1)], {type: "image/jpeg"});
 
   // update meta
   document.getElementById('meta').innerHTML = '<b>Synapse ID:</b> ' + meta[0] + '<br>';
@@ -36,6 +40,12 @@ S.synapse_loaded = function(e) {
   S.current_synapse_id = meta[0];
   S.current_synapse_center = [meta[3], meta[4], meta[5]];
   S.current_pre_synaptic_neuron = meta[1];
+
+  S.good_synapses = meta[6];
+  S.bad_synapses = meta[7];
+  S.total_synapses = meta[8];
+
+  S.update_stats();
 
 };
 
@@ -80,5 +90,16 @@ S.start_dojo = function() {
   var coordinates = S.current_synapse_center;
 
   window.open(S.dojo+'/?jump='+coordinates[0]/2+','+coordinates[1]/2+','+coordinates[2]/2+'&activeId='+S.current_pre_synaptic_neuron, 'dojo');
+
+};
+
+S.update_stats = function() {
+
+  document.getElementById('meta').innerHTML = '<b>Synapses Proofread:</b> ' + (S.good_synapses + S.bad_synapses) + '<br>';
+  document.getElementById('meta').innerHTML += '<b>Correct:</b> <b class="green">' + (S.good_synapses) + '</b><br>';
+  document.getElementById('meta').innerHTML += '<b>Errors:</b> <b class="red">' + (S.bad_synapses) + '</b><br><br>';
+  document.getElementById('meta').innerHTML += '<b>Sample Accuracy:</b> <b>' + (S.good_synapses/(S.good_synapses + S.bad_synapses)) + '</b><br>';
+  document.getElementById('meta').innerHTML += '<b>Synapses left:</b> ' + (S.total_synapses - (S.good_synapses + S.bad_synapses)) + '<br>';
+
 
 };
