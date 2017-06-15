@@ -87,7 +87,7 @@ class Manager():
       while random_id in self._seen_ids:
         random_id = np.random.randint(0, len(self._pre_neurons))
 
-      blended_image, n1, n2, x, y, z = self.get_synapse(random_id, debug=(splitted_request[2] == 'debug'))
+      blended_image, n1, n2, x, y, z = self.get_synapse(random_id, debug=(len(splitted_request > 2) and splitted_request[2] == 'debug'))
       output = StringIO.StringIO()
       blended_image.save(output, 'JPEG')
 
