@@ -71,6 +71,8 @@ class Manager():
 
       blended = Image.blend(image_, overlay_, 0.3)
 
+      cv2.imsave('/tmp/a.jpg', blended)
+
     return blended, n1, n2, x, y, z
 
   def get(self, request):
