@@ -56,6 +56,7 @@ class Util:
         y0 = max(0,max(y, row * 1024))
         y1 = min(y + height, (row+1) * 1024)
         #print x0,y0,x1,y1, pattern, row,col
+
         plane = cv2.imread(pattern.format(z=z, row=row+1, column=col+1), cv2.IMREAD_GRAYSCALE)
 
         result[y0-y:y1-y, x0-x:x1-x] = plane[y0-row * 1024: y1 - row * 1024,x0-col * 1024:x1-col *1024]

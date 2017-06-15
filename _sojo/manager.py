@@ -30,37 +30,46 @@ class Manager():
 
     self._seen_ids = []
 
-  def get_synapse(self, idx):
+  def get_synapse(self, idx, debug=False):
     '''
     '''
-    xx = int(self._x_s[idx])
-    yy = int(self._y_s[idx])
-    zz = int(self._z_s[idx])
-
-    image = Util.cut_image(self._bidx, xx-512, yy-512, zz, 1024, 1024)
-    seg = Util.cut_labels(self._tiles, xx-512, yy-512, zz, 1024, 1024)
-
-    # create RGBA label overlay of pre- and post-synaptic neuron
-    # red is pre
-    # green is post
-    overlay = np.zeros((1024, 1024, 3), dtype=np.uint8)
-    overlay[seg == self._pre_neurons[idx], 0] = 255
-    #overlay[seg == self._pre_neurons[idx], 3] = .3
-    overlay[seg == self._post_neurons[idx], 1] = 255
-    #overlay[seg == self._post_neurons[idx], 3] = .3
-
-    image_ = Image.fromarray(image)
-    image_ = image_.convert('RGBA')
-    overlay_ = Image.fromarray(overlay)
-    overlay_ = overlay_.convert('RGBA')
-
-    blended = Image.blend(image_, overlay_, 0.3)
 
     n1 = self._pre_neurons[idx]
     n2 = self._post_neurons[idx]
     x = self._x_s[idx]
     y = self._y_s[idx]
     z = self._z_s[idx]
+
+    if debug:
+      print 'loading debug image /tmp/test.jpeg'
+      import cv2
+      blended = cv2.imread('/tmp/test.jpeg')
+      blended = Image.fromarray(blended)
+
+    else:
+
+      xx = int(x)
+      yy = int(y)
+      zz = int(z)
+
+      image = Util.cut_image(self._bidx, xx-512, yy-512, zz, 1024, 1024)
+      seg = Util.cut_labels(self._tiles, xx-512, yy-512, zz, 1024, 1024)
+
+      # create RGBA label overlay of pre- and post-synaptic neuron
+      # red is pre
+      # green is post
+      overlay = np.zeros((1024, 1024, 3), dtype=np.uint8)
+      overlay[seg == self._pre_neurons[idx], 0] = 255
+      #overlay[seg == self._pre_neurons[idx], 3] = .3
+      overlay[seg == self._post_neurons[idx], 1] = 255
+      #overlay[seg == self._post_neurons[idx], 3] = .3
+
+      image_ = Image.fromarray(image)
+      image_ = image_.convert('RGBA')
+      overlay_ = Image.fromarray(overlay)
+      overlay_ = overlay_.convert('RGBA')
+
+      blended = Image.blend(image_, overlay_, 0.3)
 
     return blended, n1, n2, x, y, z
 
@@ -78,7 +87,7 @@ class Manager():
       while random_id in self._seen_ids:
         random_id = np.random.randint(0, len(self._pre_neurons))
 
-      blended_image, n1, n2, x, y, z = self.get_synapse(random_id)
+      blended_image, n1, n2, x, y, z = self.get_synapse(random_id, debug=(splitted_request[2] == 'debug'))
       output = StringIO.StringIO()
       blended_image.save(output, 'JPEG')
 
@@ -86,11 +95,9 @@ class Manager():
       meta[0] = random_id
       meta[1] = n1
       meta[2] = n2
-      meta[3] = x
-      meta[4] = y
-      meta[5] = z
-
-      print meta
+      meta[3] = int(x)
+      meta[4] = int(y)
+      meta[5] = int(z)
 
       content_type = 'image/jpeg'
       content = meta.tobytes() + output.getvalue()
