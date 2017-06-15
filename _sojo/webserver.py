@@ -55,7 +55,7 @@ class Webserver:
     print '*'*80
     print '*', '\033[93m'+'SOJO RUNNING', '\033[0m'
     print '*'
-    print '*', 'open', '\033[92m'+'http://' + ip + ':' + str(self._port) + '/c/sojo/' + '\033[0m'
+    print '*', 'open', '\033[92m'+'http://' + ip + ':' + str(self._port) + '/sojo/' + '\033[0m'
     print '*'*80
 
     tornado.ioloop.IOLoop.instance().start()

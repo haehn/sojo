@@ -1,6 +1,9 @@
 var S = S || {};
 S.history = [];
 S.current_synapse_id = -1;
+S.current_synapse_center = [0,0,0];
+S.current_pre_synaptic_neuron = -1;
+S.dojo = 'https://dojo.rc.fas.harvard.edu/dojo/'
 
 S.load_synapse = function() {
   
@@ -31,6 +34,7 @@ S.synapse_loaded = function(e) {
   document.getElementById('image').setAttribute('src',URL.createObjectURL(blob))
 
   S.current_synapse_id = meta[0];
+  S.current_synapse_center = [meta[3], meta[4], meta[5]];
 
 };
 
@@ -60,5 +64,13 @@ S.go_back = function() {
 
   document.getElementById('skip').classList = ['grayButton disabled'];
   document.getElementById('skip').onclick = null;  
+
+};
+
+S.start_dojo = function() {
+
+  var coordinates = S.current_synapse_center;
+
+  window.open(dojo+'/?jump='+coordinates[2]+','+coordinates[1]+','+coordinates[0]+'&activeId='+S.current_pre_synaptic_neuron, 'dojo');
 
 };
