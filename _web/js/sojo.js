@@ -5,7 +5,7 @@ S.current_synapse_id = -1;
 S.load_synapse = function() {
   
   var xhr = new XMLHttpRequest();
-  xhr.open('GET', '../?image/debug');
+  xhr.open('GET', '../?image');
   xhr.onload = S.synapse_loaded;
   xhr.responseType = 'arraybuffer';
   xhr.send(null);
