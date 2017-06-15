@@ -59,7 +59,7 @@ class Webserver:
 
     tornado.ioloop.IOLoop.instance().start()
 
-  def close(self):
+  def close(self, signal, frame):
     '''
     '''
 

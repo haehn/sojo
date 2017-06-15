@@ -47,7 +47,7 @@ class Manager():
       blended = Image.fromarray(blended)
 
     else:
-
+      print 'no debug'
       xx = int(x)
       yy = int(y)
       zz = int(z)
