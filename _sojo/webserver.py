@@ -1,5 +1,6 @@
 import signal
 import socket
+import sys
 import tornado
 import tornado.gen
 import tornado.web
@@ -64,3 +65,4 @@ class Webserver:
     '''
 
     print 'Sayonara!'
+    sys.exit(0)
