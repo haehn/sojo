@@ -47,7 +47,7 @@ class Manager():
       blended = Image.fromarray(blended)
 
     else:
-      print 'no debug'
+
       xx = int(x)
       yy = int(y)
       zz = int(z)
@@ -70,8 +70,6 @@ class Manager():
       overlay_ = overlay_.convert('RGBA')
 
       blended = Image.blend(image_, overlay_, 0.3)
-
-      cv2.imsave('/tmp/a.jpg', blended)
 
     return blended, n1, n2, x, y, z
 
