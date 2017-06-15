@@ -90,6 +90,8 @@ class Manager():
       meta[4] = y
       meta[5] = z
 
+      print meta
+
       content_type = 'image/jpeg'
       content = meta.tobytes() + output.getvalue()
       ####
