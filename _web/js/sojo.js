@@ -35,6 +35,7 @@ S.synapse_loaded = function(e) {
 
   S.current_synapse_id = meta[0];
   S.current_synapse_center = [meta[3], meta[4], meta[5]];
+  S.current_pre_synaptic_neuron = meta[1];
 
 };
 
@@ -71,6 +72,6 @@ S.start_dojo = function() {
 
   var coordinates = S.current_synapse_center;
 
-  window.open(dojo+'/?jump='+coordinates[2]+','+coordinates[1]+','+coordinates[0]+'&activeId='+S.current_pre_synaptic_neuron, 'dojo');
+  window.open(S.dojo+'/?jump='+coordinates[0]+','+coordinates[1]+','+coordinates[2]+'&activeId='+S.current_pre_synaptic_neuron, 'dojo');
 
 };
