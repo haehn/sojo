@@ -72,6 +72,6 @@ S.start_dojo = function() {
 
   var coordinates = S.current_synapse_center;
 
-  window.open(S.dojo+'/?jump='+coordinates[0]+','+coordinates[1]+','+coordinates[2]+'&activeId='+S.current_pre_synaptic_neuron, 'dojo');
+  window.open(S.dojo+'/?jump='+coordinates[0]/2+','+coordinates[1]/2+','+coordinates[2]/2+'&activeId='+S.current_pre_synaptic_neuron, 'dojo');
 
 };
