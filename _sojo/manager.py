@@ -93,7 +93,7 @@ class Manager():
       output = StringIO.StringIO()
       blended_image.save(output, 'JPEG')
 
-      meta = np.zeros((8), dtype=np.float64)
+      meta = np.zeros((9), dtype=np.float64)
       meta[0] = random_id
       meta[1] = n1
       meta[2] = n2
