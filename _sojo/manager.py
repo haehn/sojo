@@ -101,7 +101,7 @@ class Manager():
       meta[4] = int(y)
       meta[5] = int(z)
       meta[6] = len(self._proofread_ids_good.keys())
-      meta[7] = len(self._proofread_ids_badd.keys())
+      meta[7] = len(self._proofread_ids_bad.keys())
       meta[8] = len(self._pre_neurons)
 
       content_type = 'image/jpeg'
