@@ -46,7 +46,7 @@ class Webserver:
     # passed to the main handler, as well as an instance of core
     webapp = tornado.web.Application([
         (r'/sojo/s/(.*)', tornado.web.StaticFileHandler, {'path': '_web/', 'default_filename': 'index.html'}),
-        (r'(/sojo/)', MainHandler, {'executor':ThreadPoolExecutor(max_workers=10),
+        (r'(/)', MainHandler, {'executor':ThreadPoolExecutor(max_workers=10),
                                'webserver':self}),
     ])
     webapp.listen(self._port)
