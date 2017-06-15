@@ -77,7 +77,8 @@ class Manager():
       blended_image.save(output, 'JPEG')
 
       content_type = 'image/jpeg'
-      content = output.getvalue()
+      content = 'XXX'+output.getvalue()
+
       ####
 
 
