@@ -77,7 +77,7 @@ class Manager():
   def get(self, request):
     '''
     '''
-    splitted_request = request.uri.split('/')[1:]
+    splitted_request = request.uri.split('/')
 
     content = u'Error'
     content_type = 'text/html'
