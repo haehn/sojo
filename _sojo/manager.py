@@ -34,7 +34,7 @@ class Manager():
     self._proofread_ids_bad = {}
 
     # check if we can load data
-    if os.path.exists(self._manager._outdir):
+    if os.path.exists(self._outdir):
 
       with open(self._manager._outdir + '/seenids.p', 'rb') as f:
         self._manager._seen_ids = pickle.load(f)
