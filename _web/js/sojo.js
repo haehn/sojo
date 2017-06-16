@@ -95,10 +95,15 @@ S.start_dojo = function() {
 
 S.update_stats = function() {
 
+  var sample_accuracy = Math.round(S.good_synapses/(S.good_synapses + S.bad_synapses)*100)/100;
+  if (S.good_synapses + S.bad_synapses == 0) {
+    sample_accuracy = 0.00;
+  }
+
   document.getElementById('stats').innerHTML = '<b>Synapses Proofread:</b> ' + (S.good_synapses + S.bad_synapses) + '<br>';
   document.getElementById('stats').innerHTML += '<b>Correct:</b> <b class="green">' + (S.good_synapses) + '</b><br>';
   document.getElementById('stats').innerHTML += '<b>Errors:</b> <b class="red">' + (S.bad_synapses) + '</b><br><br>';
-  document.getElementById('stats').innerHTML += '<b>Sample Accuracy:</b> <b>' + (S.good_synapses/(S.good_synapses + S.bad_synapses)) + '</b><br>';
+  document.getElementById('stats').innerHTML += '<b>Current Accuracy:</b> <b>' + sample_accuracy + '</b><br>';
   document.getElementById('stats').innerHTML += '<b>Synapses left:</b> ' + (S.total_synapses - (S.good_synapses + S.bad_synapses)) + '<br>';
 
 
