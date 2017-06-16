@@ -1,3 +1,5 @@
+import cPickle as pickle
+import os
 import signal
 import socket
 import sys
@@ -63,6 +65,18 @@ class Webserver:
   def close(self, signal, frame):
     '''
     '''
+
+    print 'Storing data..'
+
+    if not os.path.exists(self._manager._outdir):
+      os.makedirs(self._manager._outdir)
+
+    with open(self._manager._outdir + '/seenids.p', 'wb') as f:
+      pickle.dump(self._manager._seen_ids, f)
+    with open(self._manager._outdir + '/goodids.p', 'wb') as f:
+      pickle.dump(self._manager._proofread_ids_good, f)
+    with open(self._manager._outdir + '/badids.p', 'wb') as f:
+      pickle.dump(self._manager._proofread_ids_bad, f)      
 
     print 'Sayonara!'
     sys.exit(0)

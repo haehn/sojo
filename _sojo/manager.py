@@ -32,6 +32,18 @@ class Manager():
     self._proofread_ids_good = {}
     self._proofread_ids_bad = {}
 
+    # check if we can load data
+    if os.path.exists(self._manager._outdir):
+
+      with open(self._manager._outdir + '/seenids.p', 'rb') as f:
+        self._manager._seen_ids = pickle.load(f)
+      with open(self._manager._outdir + '/goodids.p', 'rb') as f:
+        self._manager._proofread_ids_good = pickle.load(f)
+      with open(self._manager._outdir + '/badids.p', 'rb') as f:
+        self._manager._proofread_ids_bad = pickle.load(f)    
+
+      print 'Loaded', len(self._seen_ids), 'proofread synapses..'  
+
   def get_synapse(self, idx, debug=False):
     '''
     '''
